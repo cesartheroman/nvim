@@ -1,0 +1,49 @@
+vim.g.mapleader = " "
+local keymap = vim.keymap
+
+-- Use 'jk' to exist Insert mode
+keymap.set("i", "jk", "<ESC>")
+
+-- Navigation within Insert Mode
+keymap.set("i", "<C-h>", "<Left>")
+keymap.set("i", "<C-l>", "<Right>")
+keymap.set("i", "<C-j>", "<Down>")
+keymap.set("i", "<C-k>", "<Up>")
+
+-- Copy all
+keymap.set("n", "<C-c>", "<cmd> %y+ <CR>")
+
+-- Select all
+keymap.set("n", "<C-a>", "gg<S-v>G")
+
+-- Format file
+keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[Fo]rmat file" })
+
+-- Clear search highlights
+keymap.set("n", "<leader>ch", ":nohl<CR>", { desc = "Clear search highlights" })
+
+-- Navigate next buffer
+keymap.set("n", "<leader>b]", ":bnext<CR>", { desc = "Buffer next" })
+
+-- Navigate previous buffer
+keymap.set("n", "<leader>b[", ":bprev<CR>", { desc = "Buffer prev" })
+
+-- Up + Down Navigation
+keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up while keeping cursor in middle of page" })
+keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down while keeping cursor in middle of page" })
+
+-- Window management
+keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Spit window vertically" })
+keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Spit window horizontally" })
+keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
+keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
+
+-- Higlight on yank
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+	callback = function()
+		vim.highlight.on_yank()
+	end,
+	group = highlight_group,
+	pattern = "*",
+})
