@@ -4,6 +4,7 @@ vim.g.maplocalleader = " "
 
 local keymap = vim.keymap
 
+-- See `:help vim.keymap.set()`
 -- Use 'jk' to exist Insert mode
 keymap.set("i", "jk", "<ESC>")
 
@@ -48,6 +49,7 @@ keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window down" })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
 
 -- Higlight on yank
+-- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()

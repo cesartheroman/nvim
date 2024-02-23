@@ -1,3 +1,4 @@
+-- See `:help vim.o`
 local opt = vim.opt
 
 opt.tabstop = 2

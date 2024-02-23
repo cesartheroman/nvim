@@ -1,3 +1,4 @@
+-- See `:help telescope` and `:help telescope.setup()`
 return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.5",
@@ -34,6 +35,7 @@ return {
 		telescope.load_extension("fzf")
 
 		-- Find keymaps
+		-- See `:help telescope.builtin`
 		keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[F]ind [F]iles" })
 		keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[F]ind by [G]rep" })
 		keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "[F]ind [H]elp" })
