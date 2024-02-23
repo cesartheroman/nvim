@@ -1,10 +1,7 @@
 return {
-  "catppuccin/nvim",
-  lazy = false,
-  name = "catppuccin",
-  priority = 1000,
-  config = function()
-    vim.cmd.colorscheme "catppuccin"  
-  end
+	"bluz71/vim-nightfly-colors",
+	priority = 1000,
+	config = function()
+		vim.cmd.colorscheme("nightfly")
+	end,
 }
-

@@ -8,6 +8,5 @@ opt.autoindent = true
 
 opt.number = true
 opt.relativenumber = true
-  
-opt.clipboard:append 'unnamedplus'
 
+opt.clipboard:append("unnamedplus")

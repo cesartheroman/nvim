@@ -1,4 +1,7 @@
+-- See `:help mapleader`
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 local keymap = vim.keymap
 
 -- Use 'jk' to exist Insert mode
