@@ -41,6 +41,12 @@ keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Spit window horizontally" })
 keymap.set("n", "<leader>se", "<C-w>=", { desc = "Make splits equal size" })
 keymap.set("n", "<leader>sx", "<cmd>close<CR>", { desc = "Close current split" })
 
+-- Switch between windows
+keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+keymap.set("n", "<C-l>", "<C-w>l", { desc = "Window right" })
+keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+
 -- Higlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
