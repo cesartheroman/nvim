@@ -23,12 +23,12 @@ return {
 				require("gitsigns").next_hunk,
 				{ buffer = bufnr, desc = "[G]o to [N]ext Hunk" }
 			)
-			vim.keymap.set(
-				"n",
-				"<leader>ph",
-				require("gitsigns").preview_hunk,
-				{ buffer = bufnr, desc = "[P]review [H]unk" }
-			)
+			-- vim.keymap.set(
+			-- 	"n",
+			-- 	"<leader>ph",
+			-- 	require("gitsigns").preview_hunk,
+			-- 	{ buffer = bufnr, desc = "[P]review [H]unk" }
+			-- )
 		end,
 	},
 }

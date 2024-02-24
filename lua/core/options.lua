@@ -11,3 +11,12 @@ opt.number = true
 opt.relativenumber = true
 
 opt.clipboard:append("unnamedplus")
+
+-- turn off swapfile
+opt.swapfile = false
+
+-- line break on whole words
+opt.linebreak = true
+
+-- Keep signcolumn on by default
+vim.wo.signcolumn = "yes"

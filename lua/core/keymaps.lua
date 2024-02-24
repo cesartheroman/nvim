@@ -27,10 +27,10 @@ keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[Fo]rmat file" })
 keymap.set("n", "<leader>ch", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- Navigate next buffer
-keymap.set("n", "<leader>b]", ":bnext<CR>", { desc = "Buffer next" })
+keymap.set("n", "<leader>bb", ":bnext<CR>", { desc = "Buffer next" })
 
 -- Navigate previous buffer
-keymap.set("n", "<leader>b[", ":bprev<CR>", { desc = "Buffer prev" })
+keymap.set("n", "<leader>bn", ":bprev<CR>", { desc = "Buffer prev" })
 
 -- Up + Down Navigation
 keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up while keeping cursor in middle of page" })
@@ -47,6 +47,10 @@ keymap.set("n", "<C-h>", "<C-w>h", { desc = "Window left" })
 keymap.set("n", "<C-l>", "<C-w>l", { desc = "Window right" })
 keymap.set("n", "<C-j>", "<C-w>j", { desc = "Window down" })
 keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+
+--allow search terms to stay in the middle
+keymap.set("n", "n", "nzzzv")
+keymap.set("n", "N", "Nzzzv")
 
 -- Higlight on yank
 -- See `:help vim.highlight.on_yank()`
