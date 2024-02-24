@@ -36,3 +36,16 @@ opt.colorcolumn = "80"
 
 -- Enable signcolumn to prevent buffer from jumping right
 opt.signcolumn = "yes"
+
+-- Enable persistent undo history
+opt.undofile = true
+
+opt.termguicolors = true
+
+-- Set fold settings
+-- These options were reccommended by nvim-ufo
+-- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
+opt.foldcolumn = "0"
+opt.foldlevel = 99
+opt.foldlevelstart = 99
+opt.foldenable = true
