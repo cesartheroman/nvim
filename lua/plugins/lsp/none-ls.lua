@@ -35,12 +35,12 @@ return {
 			sources = {
 				formatting.stylua,
 				formatting.prettier,
-				diagnostics.eslint_d.with({
-					condition = function(utils)
-						-- only enable if root has .eslintrc.js or .eslintrc.cjs
-						return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" })
-					end,
-				}),
+				-- diagnostics.eslint_d.with({
+				-- 	condition = function(utils)
+				-- 		-- only enable if root has .eslintrc.js or .eslintrc.cjs
+				-- 		return utils.root_has_file({ ".eslintrc.js", ".eslintrc.cjs" })
+				-- 	end,
+				-- }),
 				formatting.isort,
 				formatting.black,
 				diagnostics.pylint,
