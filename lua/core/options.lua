@@ -10,6 +10,10 @@ opt.autoindent = true
 opt.number = true
 opt.relativenumber = true
 
+-- Enable mouse mode
+opt.mouse = "a"
+
+-- Sync clipboard between OS and Neovim, use as register
 opt.clipboard:append("unnamedplus")
 
 -- turn off swapfile
@@ -18,5 +22,11 @@ opt.swapfile = false
 -- line break on whole words
 opt.linebreak = true
 
--- Keep signcolumn on by default
-vim.wo.signcolumn = "yes"
+-- Set completeopt to have a better completion experience
+opt.completeopt = "menuone,noselect"
+
+-- Allow backspace on indent, end of line or insert mode start position
+opt.backspace = "indent,eol,start"
+
+-- wrap text
+opt.wrap = true
