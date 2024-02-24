@@ -23,7 +23,7 @@ return {
 		end
 
 		-- On buffer attach
-		local on_attach = function(client, bufnr)
+		local on_attach = function(_, bufnr)
 			opts.buffer = bufnr
 
 			opts.desc = "[C]ode [A]ctions"
