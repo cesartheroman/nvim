@@ -3,7 +3,6 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
 		"hrsh7th/cmp-nvim-lsp",
-		"folke/neodev.nvim",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
@@ -16,9 +15,6 @@ return {
 		local keymap = vim.keymap
 		local opts = { noremap = true, silent = true }
 
-		-- Enable autocompletion (assign to every lsp server config)
-		local capabilities = cmp_nvim_lsp.default_capabilities()
-
 		-- Change the Diagnostic symbols in the sign column (gutter)
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
@@ -27,7 +23,7 @@ return {
 		end
 
 		-- On buffer attach
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
 			opts.desc = "[C]ode [A]ctions"
@@ -52,6 +48,9 @@ return {
 			opts.desc = "Restart LSP"
 			keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts)
 		end
+
+		-- Enable autocompletion (assign to every lsp server config)
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		-- [[Configure Servers]]
 

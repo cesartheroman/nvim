@@ -1,6 +1,7 @@
 -- See `:help lualine.txt`
 return {
 	"nvim-lualine/lualine.nvim",
+	event = { "BufReadPre", "BufNewFile" },
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
 		local lualine = require("lualine")
