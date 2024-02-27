@@ -45,7 +45,7 @@ opt.termguicolors = true
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-opt.foldcolumn = "0"
+opt.foldcolumn = "1" -- '0' is not bad
 opt.foldlevel = 99
 opt.foldlevelstart = 99
 opt.foldenable = true

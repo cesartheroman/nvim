@@ -22,6 +22,7 @@ return {
 			["<leader>t"] = { desc = "todo trouble" },
 			["<leader>v"] = { desc = "vim maximize" },
 			["<leader>x"] = { desc = "trouble" },
+			["<leader>z"] = { desc = "code folding" },
 		},
 	},
 	config = function(_, opts)
@@ -30,4 +31,4 @@ return {
 		wk.register(opts.defaults)
 	end,
 }
---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
+--
