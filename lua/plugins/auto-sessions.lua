@@ -15,6 +15,7 @@ return {
 		-- set mapping for searching a session.
 		vim.keymap.set("n", "<leader>ls", require("auto-session.session-lens").search_session, {
 			noremap = true,
+			desc = "[L]ist [S]essions",
 		})
 
 		-- For better auto-session experience
