@@ -21,7 +21,7 @@ keymap.set("n", "<C-c>", "<cmd> %y+ <CR>")
 keymap.set("n", "<C-a>", "gg<S-v>G")
 
 -- Format file
-keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[Fo]rmat file" })
+keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[fo]rmat file" })
 
 -- Clear search highlights
 keymap.set("n", "<leader>ch", ":nohl<CR>", { desc = "Clear search highlights" })
@@ -53,7 +53,8 @@ keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
 -- todo trouble
-keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { desc = "[T]odo [T]ouble" })
+keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { desc = "[t]odo [t]ouble" })
+keymap.set("n", "<leader>tf", ":TodoTelescope<CR>", { desc = "[t]elescope [f]ind todos" })
 
 -- Higlight on yank
 -- See `:help vim.highlight.on_yank()`

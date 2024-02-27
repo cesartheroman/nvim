@@ -1,3 +1,4 @@
+-- TODO: sample 2
 return {
 	"folke/which-key.nvim",
 	init = function()
@@ -19,7 +20,7 @@ return {
 			["<leader>l"] = { desc = "list session" },
 			["<leader>r"] = { desc = "rename/restart" },
 			["<leader>s"] = { desc = "window splits" },
-			["<leader>t"] = { desc = "todo trouble" },
+			["<leader>t"] = { desc = "todo comments" },
 			["<leader>v"] = { desc = "vim maximize" },
 			["<leader>x"] = { desc = "trouble" },
 			["<leader>z"] = { desc = "code folding" },
@@ -31,4 +32,3 @@ return {
 		wk.register(opts.defaults)
 	end,
 }
---
