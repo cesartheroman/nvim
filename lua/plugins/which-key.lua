@@ -1,4 +1,3 @@
--- TODO: sample 2
 return {
 	"folke/which-key.nvim",
 	init = function()

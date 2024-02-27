@@ -55,6 +55,22 @@ keymap.set("n", "N", "Nzzzv")
 -- todo trouble
 keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { desc = "[t]odo [t]ouble" })
 keymap.set("n", "<leader>tf", ":TodoTelescope<CR>", { desc = "[t]elescope [f]ind todos" })
+keymap.set("n", "<leader>tl", ":TodoLocList<CR>", { desc = "[t]odo [l]oclist" })
+keymap.set("n", "<leader>tq", ":TodoQuickFix<CR>", { desc = "[t]odo [q]uickfix" })
+
+keymap.set("n", "]t", function()
+	require("todo-comments").jump_next()
+end, { desc = "Next todo comment" })
+
+keymap.set("n", "[t", function()
+	require("todo-comments").jump_prev()
+end, { desc = "Previous todo comment" })
+
+-- You can also specify a list of valid jump keywords
+
+keymap.set("n", "]t", function()
+	require("todo-comments").jump_next({ keywords = { "ERROR", "WARNING" } })
+end, { desc = "Next error/warning todo comment" })
 
 -- Higlight on yank
 -- See `:help vim.highlight.on_yank()`
