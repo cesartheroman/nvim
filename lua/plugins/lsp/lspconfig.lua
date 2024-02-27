@@ -41,6 +41,9 @@ return {
 			opts.desc = "[G]oto [T]ype definition"
 			keymap.set("n", "gt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
+			opts.desc = "Smart [R]e[n]ame"
+			keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+
 			opts.desc = "Hover Documentation"
 			keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
