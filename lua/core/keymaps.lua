@@ -52,6 +52,9 @@ keymap.set("n", "<C-k>", "<C-w>k", { desc = "Window up" })
 keymap.set("n", "n", "nzzzv")
 keymap.set("n", "N", "Nzzzv")
 
+-- todo trouble
+keymap.set("n", "<leader>tt", ":TodoTrouble<CR>", { desc = "[T]odo [T]ouble" })
+
 -- Higlight on yank
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })

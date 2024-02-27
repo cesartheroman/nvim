@@ -10,8 +10,8 @@ return {
 		local keymap = vim.keymap
 
 		-- For adding file and opening up Harpoon UI
-		keymap.set("n", "<leader>hh", ui.toggle_quick_menu, { desc = "Harpoon UI" })
-		keymap.set("n", "<leader>ha", mark.add_file, { desc = "Add file to Harpoon" })
+		keymap.set("n", "<leader>hh", ui.toggle_quick_menu, { desc = "UI" })
+		keymap.set("n", "<leader>ha", mark.add_file, { desc = "Add file " })
 
 		-- For navigating through Harpooned files
 		keymap.set("n", "<leader>h1", function()
