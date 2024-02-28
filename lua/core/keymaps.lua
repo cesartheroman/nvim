@@ -24,7 +24,7 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[fo]rmat file" })
 
 -- Clear search highlights
-keymap.set("n", "<leader>ch", ":nohl<CR>", { desc = "Clear search highlights" })
+keymap.set("n", "<leader>cc", ":nohl<CR>", { desc = "Clear search highlights" })
 
 -- Navigate next buffer
 keymap.set("n", "<leader>bb", ":bnext<CR>", { desc = "Buffer next" })

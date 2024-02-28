@@ -11,7 +11,7 @@ return {
 			["]"] = { name = "+next" },
 			["["] = { name = "+prev" },
 			["<leader>b"] = { desc = "buffer next/prev" },
-			["<leader>c"] = { desc = "code action/clear highlight" },
+			["<leader>c"] = { desc = "code/chat gippity" },
 			["<leader>e"] = { desc = "neotree" },
 			["<leader>f"] = { desc = "find" },
 			["<leader>g"] = { desc = "git" },
