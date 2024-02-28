@@ -66,12 +66,6 @@ keymap.set("n", "[t", function()
 	require("todo-comments").jump_prev()
 end, { desc = "Previous todo comment" })
 
--- You can also specify a list of valid jump keywords
-
-keymap.set("n", "]t", function()
-	require("todo-comments").jump_next({ keywords = { "ERROR", "WARNING" } })
-end, { desc = "Next error/warning todo comment" })
-
 -- Higlight on yank
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
