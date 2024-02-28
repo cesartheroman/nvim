@@ -21,8 +21,6 @@ return {
 		)
 		keymap.set("n", "<leader>chr", ":ChatGPTRun", { desc = "ChatGippity" })
 
-		require("chatgpt").setup({
-			api_key_cmd = "echo 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",
-		})
+		require("chatgpt").setup({})
 	end,
 }
