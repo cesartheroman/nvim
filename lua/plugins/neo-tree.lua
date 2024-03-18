@@ -7,7 +7,7 @@ return {
 		"MunifTanjim/nui.nvim",
 	},
 	config = function()
-		vim.keymap.set("n", "<leader>ee", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
+		vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
 		vim.keymap.set("n", "<leader>ef", ":Neotree reveal_force_cwd<CR>", { desc = "Toggle Neotree in CWD" })
 	end,
 }
