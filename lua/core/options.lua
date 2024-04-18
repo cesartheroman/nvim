@@ -1,56 +1,93 @@
--- See `:help vim.o`
-local opt = vim.opt
+-- [[ Setting options ]]
+-- See `:help vim.opt`
+-- NOTE: You can change these options as you wish!
+--  For more options, you can see `:help option-list`
 
-opt.tabstop = 2
-opt.shiftwidth = 2
-opt.expandtab = true
-opt.softtabstop = 2
-opt.autoindent = true
+-- Tabs and indenting
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+vim.opt.expandtab = true
+vim.opt.softtabstop = 2
+vim.opt.autoindent = true
 
-opt.number = true
-opt.relativenumber = true
+-- Make line numbers default
+vim.opt.number = true
+vim.opt.relativenumber = true
 
--- Enable mouse mode
-opt.mouse = "a"
+-- Enable mouse mode, can be useful for resizing splits for example!
+vim.opt.mouse = "a"
 
--- Sync clipboard between OS and Neovim, use as register
-opt.clipboard:append("unnamedplus")
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
--- turn off swapfile
-opt.swapfile = false
+-- Sync clipboard between OS and Neovim.
+--  Remove this option if you want your OS clipboard to remain independent.
+--  See `:help 'clipboard'`
+vim.opt.clipboard = "unnamedplus"
+
+-- Enable break indent
+vim.opt.breakindent = true
 
 -- line break on whole words
-opt.linebreak = true
+vim.opt.linebreak = true
+
+-- Save undo history
+vim.opt.undofile = true
+
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- Keep signcolumn on by default
+vim.opt.signcolumn = "yes"
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
+-- Decrease mapped sequence wait time
+-- Displays which-key popup sooner
+vim.opt.timeoutlen = 300
+
+-- Configure how new splits should be opened
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- Sets how neovim will display certain whitespace characters in the editor.
+--  See `:help 'list'`
+--  and `:help 'listchars'`
+vim.opt.list = true
+vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
+
+-- Preview substitutions live, as you type!
+vim.opt.inccommand = "split"
+
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+
+-- Minimal number of screen lines to keep above and below the cursor.
+vim.opt.scrolloff = 8
+
+-- turn off swapfile
+vim.opt.swapfile = false
 
 -- Set completeopt to have a better completion experience
-opt.completeopt = "menuone,noselect"
+vim.opt.completeopt = "menuone,noselect"
 
 -- Allow backspace on indent, end of line or insert mode start position
-opt.backspace = "indent,eol,start"
+vim.opt.backspace = "indent,eol,start"
 
 -- wrap text
-opt.wrap = true
+vim.opt.wrap = true
 
 -- Place column line
-opt.colorcolumn = "80"
+vim.opt.colorcolumn = "80"
 
--- Enable signcolumn to prevent buffer from jumping right
-opt.signcolumn = "yes"
-
--- Enable persistent undo history
-opt.undofile = true
-
-opt.termguicolors = true
+vim.opt.termguicolors = true
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo
 -- See: https://github.com/kevinhwang91/nvim-ufo#minimal-configuration
-opt.foldcolumn = "0"
-opt.foldlevel = 99
-opt.foldlevelstart = 99
-opt.foldenable = true
-
--- Case-insensitive searching UNLESS \C or capital in search
-opt.ignorecase = true
-opt.smartcase = true
-opt.scrolloff = 8
+vim.opt.foldcolumn = "0"
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 99
+vim.opt.foldenable = true
