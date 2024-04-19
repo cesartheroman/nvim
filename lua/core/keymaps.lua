@@ -42,7 +42,7 @@ vim.keymap.set("i", "<C-k>", "<Up>")
 vim.keymap.set("n", "<C-c>", "<cmd> %y+ <CR>")
 
 -- Select all
-vim.keymap.set("n", "<C-a>", "gg<S-v>G")
+vim.keymap.set("n", "<C-g>", "gg<S-v>G", { desc = "select all" })
 
 -- Format file
 vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format, { desc = "[fo]rmat file" })
