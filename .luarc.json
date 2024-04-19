@@ -1,4 +1,8 @@
 {
+    "diagnostics.disable": [
+        "inject-field",
+        "missing-fields"
+    ],
     "diagnostics.globals": [
         "vim"
     ]
