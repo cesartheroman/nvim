@@ -1,27 +1,24 @@
--- [[ Setting options ]]
--- See `:help vim.opt`
--- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
+--  See `:help vim.opt`
 
--- Tabs and indenting
+--  Tabs and indenting (default for JS/TS)
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-vim.opt.expandtab = true
 vim.opt.softtabstop = 2
 vim.opt.autoindent = true
+vim.opt.expandtab = true
 
--- Make line numbers default
+--  Make line numbers default
 vim.opt.number = true
 vim.opt.relativenumber = true
 
--- Enable mouse mode, can be useful for resizing splits for example!
+--  Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 
--- Don't show the mode, since it's already in the status line
+--  Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
+--  Sync clipboard between OS and Neovim.
 --  See `:help 'clipboard'`
 vim.opt.clipboard = 'unnamedplus'
 
@@ -78,9 +75,6 @@ vim.opt.backspace = 'indent,eol,start'
 
 -- wrap text
 vim.opt.wrap = true
-
--- Place column line
-vim.opt.colorcolumn = '80'
 
 vim.opt.termguicolors = true
 
