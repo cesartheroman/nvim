@@ -1,15 +1,28 @@
+--  For plugins that are <= 10 lines of config
 return {
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
-  -- Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
-  -- Use `opts = {}` to force a plugin to be loaded.
-  --
-  --  This is equivalent to:
-  --    require('Comment').setup({})
-  'christoomey/vim-tmux-navigator',
-  'tpope/vim-fugitive',
-  'stevearc/dressing.nvim',
-  'prisma/vim-prisma',
+    'christoomey/vim-tmux-navigator',
+    'tpope/vim-fugitive',
+    'stevearc/dressing.nvim',
+    {
+        'szw/vim-maximizer',
+        keys = {
+            { '<leader>vm', '<cmd>MaximizerToggle<CR>', desc = '[v]im [m]aximize split' },
+        },
+    },
+    {
+        'folke/todo-comments.nvim',
+        event = 'VimEnter',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = { signs = false },
+    },
+    -- Colorschemes
+    {
+        'bluz71/vim-nightfly-colors',
+        priority = 1000,
+        init = function()
+            vim.cmd.colorscheme('nightfly')
+        end,
+    },
+    { 'folke/tokyonight.nvim', event = 'User LazyColorscheme' },
+    { 'catppuccin/nvim', event = 'User LazyColorscheme' },
 }
