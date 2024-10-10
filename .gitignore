@@ -7,3 +7,4 @@ nvim
 spell/
 lazy-lock.json
 chatgpt-nvim.lua
+hi.lua
