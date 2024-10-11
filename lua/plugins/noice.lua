@@ -48,5 +48,9 @@ return {
                 },
             },
         })
+
+        vim.keymap.set('n', '<leader>dn', function()
+            require('notify').dismiss({ silent = true, pending = true })
+        end, { desc = '[d]ismiss [n]otification' })
     end,
 }
