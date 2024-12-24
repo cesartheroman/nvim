@@ -118,18 +118,30 @@ return {
 
             -- sources for autocompletion
             sources = cmp.config.sources({
-                { name = 'nvim_lsp' },
-                { name = 'buffer' }, -- text within current buffer
-                { name = 'path' }, -- file system paths
-                { name = 'luasnip' }, -- snippets
+                { name = 'nvim_lsp', priority = 1000 },
+                { name = 'buffer', priority = 750 }, -- text within current buffer
+                { name = 'path', priority = 500 }, -- file system paths
+                { name = 'luasnip', priority = 250 }, -- snippets
             }),
 
             -- configure lspkind for vs-code like pictograms in completion menu
             formatting = {
-                format = lspkind.cmp_format({
-                    maxwidth = 50,
-                    ellipsis_char = '...',
-                }),
+                format = function(entry, item)
+                    -- Add the LSP source name to the menu for `nvim_lsp`
+                    if entry.source.name == 'nvim_lsp' then
+                        ---@diagnostic disable-next-line: undefined-field
+                        item.menu = '[' .. (entry.source.client and entry.source.client.name or 'LSP') .. ']'
+                    end
+
+                    -- Apply the lspkind formatting
+                    local formatted_item = lspkind.cmp_format({
+                        maxwidth = 100,
+                        ellipsis_char = '...',
+                    })(entry, item)
+
+                    -- Merge custom menu with lspkind formatting
+                    return formatted_item
+                end,
             },
         })
     end,

@@ -3,6 +3,9 @@ return {
     'christoomey/vim-tmux-navigator',
     'tpope/vim-fugitive',
     'stevearc/dressing.nvim',
+    -- 'github/copilot.vim',
+    { 'folke/tokyonight.nvim', event = 'User LazyColorscheme' },
+    { 'catppuccin/nvim', event = 'User LazyColorscheme' },
     {
         'szw/vim-maximizer',
         keys = {
@@ -15,7 +18,6 @@ return {
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = { signs = false },
     },
-    -- Colorschemes
     {
         'bluz71/vim-nightfly-colors',
         priority = 1000,
@@ -23,6 +25,4 @@ return {
             vim.cmd.colorscheme('nightfly')
         end,
     },
-    { 'folke/tokyonight.nvim', event = 'User LazyColorscheme' },
-    { 'catppuccin/nvim', event = 'User LazyColorscheme' },
 }

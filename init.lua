@@ -12,3 +12,8 @@ require('lazy').setup({
     { import = 'plugins' },
     { import = 'plugins.lsp' },
 })
+require('plugins-custom/greet').setup({
+    name = 'David',
+})
+require('plugins-custom/myplugin').setup()
+require('plugins-custom/quicknotes').setup()

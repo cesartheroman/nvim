@@ -6,7 +6,7 @@ return {
     },
     config = function()
         require('notify').setup({
-            stages = 'static',
+            -- stages = 'static',
             top_down = false,
         })
 

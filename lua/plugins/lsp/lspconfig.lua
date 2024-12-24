@@ -92,7 +92,7 @@ return {
                 --  See `:help K` for why this keymap.
                 map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
-                -- WARN: This is not Goto Definition, this is Goto Declaration.
+                --This is not Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header.
                 map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
 
@@ -147,15 +147,27 @@ return {
                             callSnippet = 'Replace',
                         },
                         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-                        diagnostics = { disable = { 'missing-fields' } },
+                        diagnostics = { disable = { 'missing-fields', 'inject-field' }, globals = 'vim' },
                     },
                 },
+                on_attach = function(client, bufnr)
+                    if client.name == 'lua_ls' then
+                        vim.bo[bufnr].tabstop = 4
+                        vim.bo[bufnr].shiftwidth = 4
+                        vim.bo[bufnr].softtabstop = 4
+                        vim.bo[bufnr].autoindent = true
+                        vim.bo[bufnr].expandtab = true
+                    end
+                end,
             },
 
             -- Some languages (like typescript) have entire language plugins that can be useful:
             --    https://github.com/pmizio/typescript-tools.nvim
             ts_ls = {
                 capabilities = capabilities,
+                on_attach = function(client)
+                    client.server_capabilities.documentFormattingProvider = false -- Prevent LSP from auto-formatting
+                end,
             },
 
             gopls = {
@@ -165,31 +177,48 @@ return {
                 root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
             },
 
-            pyright = {
-                capabilities = capabilities,
-                settings = {
-                    pyright = {
-                        -- Using Ruff's import organizer
-                        disableOrganizeImports = true,
-                    },
-                    python = {
-                        analysis = {
-                            -- Ignore all files for analysis to exclusively use Ruff for linting
-                            ignore = { '*' },
-                        },
-                    },
-                },
-            },
+            -- pyright = {
+            --     capabilities = capabilities, -- Include LSP-specific capabilities
+            --     settings = {
+            --         python = {
+            --             analysis = {
+            --                 autoSearchPaths = true, -- Automatically search for import paths
+            --                 useLibraryCodeForTypes = true, -- Use type hints from libraries
+            --                 diagnosticMode = 'workspace', -- Check the entire workspace for issues
+            --                 typeCheckingMode = 'basic', -- Options: "off", "basic", "strict"
+            --                 logLevel = 'Warning', -- Control logging level for pyright
+            --                 stubPath = 'typings', -- Use custom stub files if necessary
+            --                 extraPaths = {}, -- Add additional paths for module resolution
+            --                 autoImportCompletions = true, -- Enable auto-import suggestions
+            --             },
+            --         },
+            --     },
+            --     handlers = {
+            --         -- Disable hover documentation from Pyright
+            --         ['textDocument/hover'] = function(_, _, _)
+            --             return nil
+            --         end,
+            --     },
+            -- capabilities = capabilities,
+            -- settings = {
+            --     pyright = {
+            --         -- Using Ruff's import organizer
+            --         disableOrganizeImports = true,
+            --     },
+            --     python = {
+            --         analysis = {
+            --             -- Ignore all files for analysis to exclusively use Ruff for linting
+            --             ignore = { '*' },
+            --         },
+            --     },
+            -- },
+            -- },
 
             html = {
                 capabilities = capabilities,
             },
 
             cssls = {
-                capabilities = capabilities,
-            },
-
-            tailwindcss = {
                 capabilities = capabilities,
             },
 
@@ -231,8 +260,33 @@ return {
             handlers = {
                 function(server_name)
                     local server = servers[server_name] or {}
-                    -- This handles overriding only values explicitly passed by the server configuration above. Useful when disabling certain features of an LSP (for example, turning off formatting for tsserver)
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+
+                    -- Customize specific servers
+                    if server_name == 'pyright' then
+                        server.settings = {
+                            python = {
+                                analysis = {
+                                    autoSearchPaths = true,
+                                    useLibraryCodeForTypes = true,
+                                    diagnosticMode = 'workspace',
+                                    typeCheckingMode = 'basic',
+                                    autoImportCompletions = true,
+                                },
+                            },
+                        }
+                        server.handlers = {
+                            -- Disable hover for Pyright
+                            ['textDocument/hover'] = function(_, _, _)
+                                return nil
+                            end,
+                        }
+                    elseif server_name == 'jedi_language_server' then
+                        -- Disable diagnostics for Jedi-LSP
+                        server.on_attach = function(client)
+                            client.server_capabilities.diagnosticProvider = false
+                        end
+                    end
                     require('lspconfig')[server_name].setup(server)
                 end,
             },

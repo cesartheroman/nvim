@@ -16,6 +16,9 @@ return {
         lint.linters.eslint_d.args = {
             '--format',
             'json',
+            '--quiet', -- Only report errors, not warnings
+            '--rule',
+            'linebreak-style: 0', -- This disables the linebreak-style rule
         }
 
         -- Custom parser to silently ignore ESLint configuration errors
@@ -24,6 +27,7 @@ return {
                 -- Silently ignore these errors by returning an empty result
                 return {}
             end
+
             -- For all other cases, use the default parser
             return require('lint.linters.eslint').parser(output, bufnr)
         end

@@ -22,6 +22,12 @@ return {
             return parent_dir .. '/' .. filename
         end
 
+        ---@diagnostic disable-next-line: duplicate-set-field
+        statusline.inactive = function()
+            local filename = vim.fn.expand('%:t')
+            local parent_dir = vim.fn.expand('%:h:t')
+            return parent_dir .. '/' .. filename
+        end
         -- Active indent guide and indent text objects. When you're browsing
         -- code, this highlights the current level of indentation, and animates
         -- the highlighting.

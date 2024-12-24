@@ -141,6 +141,6 @@ return {
             builtin.colorscheme({ enable_preview = true })
         end
         -- Set the keymap to call the function
-        vim.keymap.set('n', '<leader>uC', openColorschemePickerWithEvent, { desc = 'Colorscheme with preview' })
+        vim.keymap.set('n', '<leader>uc', openColorschemePickerWithEvent, { desc = 'Colorscheme with preview' })
     end,
 }

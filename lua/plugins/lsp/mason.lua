@@ -30,10 +30,8 @@ return {
             ensure_installed = {
                 'lua_ls',
                 'ts_ls',
-                'gopls',
                 'pyright',
-                -- 'emmet_ls',
-                -- 'mdx_analyzer',
+                'gopls',
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -47,7 +45,6 @@ return {
                 'eslint_d', -- js linter
                 'isort', -- python import sort
                 'black', -- python formatter
-                -- 'pylint', -- python linter
                 'ruff',
             },
         })
