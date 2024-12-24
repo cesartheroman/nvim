@@ -15,6 +15,11 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('i', 'jk', '<ESC>')
 vim.keymap.set('i', 'kj', '<ESC>')
 
+-- Remap :W to :w
+vim.cmd('cabbrev W w')
+vim.cmd('cabbrev Q q')
+vim.cmd('cabbrev Wq wq')
+
 -- Copy all
 vim.keymap.set('n', '<C-c>', '<cmd> %y+ <CR>')
 
@@ -88,3 +93,43 @@ vim.keymap.set('v', '<C-s>', '<Esc>:w<CR>gv', { noremap = true, silent = true })
 vim.keymap.set('n', '<C-q>', ':q<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-q>', '<Esc>:q<CR>a', { noremap = true, silent = true })
 vim.keymap.set('v', '<C-q>', '<Esc>:q<CR>gv', { noremap = true, silent = true })
+
+vim.keymap.set('n', '<leader>gbp', function()
+    -- Get the current file and line number
+    local file = vim.fn.expand('%:p') -- Full path of the current file
+    local line = vim.fn.line('.') -- Current line number
+
+    -- Run git blame for the specific line
+    local blame = vim.fn.system('git blame -L ' .. line .. ',' .. line .. ' -- ' .. file)
+
+    -- Check if git blame returned an error
+    if vim.v.shell_error ~= 0 then
+        vim.notify('Error running git blame: ' .. blame, vim.log.levels.ERROR)
+        return
+    end
+
+    -- Extract the commit hash from the git blame output
+    local commit_hash = blame:match('^(%w+)')
+
+    -- Get the full commit message for the extracted hash
+    local commit_message = vim.fn.system('git show --no-patch --format=%B ' .. commit_hash)
+
+    -- Display the commit message in a popup
+    vim.ui.input({ prompt = 'Git Comit Message:', default = commit_message }, function(input)
+        -- Input is not used; just for showing the popup
+    end)
+end, { desc = 'Show Git Blame Commit Message' })
+
+vim.keymap.set('n', '<leader>ux', function()
+    -- Find the most recent buffer that is still ilsted but not curretnly visible
+    local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+    for _, buf in ipairs(buffers) do
+        if buf.hidden == 1 then
+            -- Open the buffer in a new split
+            vim.cmd('split')
+            vim.cmd('buffer ' .. buf.bufnr)
+            return
+        end
+    end
+    vim.notify('No hidden buffers to reopen.', vim.log.levels.WARN)
+end, { desc = 'Reopen Last Closed Split Buffer ' })
