@@ -177,43 +177,6 @@ return {
                 root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
             },
 
-            -- pyright = {
-            --     capabilities = capabilities, -- Include LSP-specific capabilities
-            --     settings = {
-            --         python = {
-            --             analysis = {
-            --                 autoSearchPaths = true, -- Automatically search for import paths
-            --                 useLibraryCodeForTypes = true, -- Use type hints from libraries
-            --                 diagnosticMode = 'workspace', -- Check the entire workspace for issues
-            --                 typeCheckingMode = 'basic', -- Options: "off", "basic", "strict"
-            --                 logLevel = 'Warning', -- Control logging level for pyright
-            --                 stubPath = 'typings', -- Use custom stub files if necessary
-            --                 extraPaths = {}, -- Add additional paths for module resolution
-            --                 autoImportCompletions = true, -- Enable auto-import suggestions
-            --             },
-            --         },
-            --     },
-            --     handlers = {
-            --         -- Disable hover documentation from Pyright
-            --         ['textDocument/hover'] = function(_, _, _)
-            --             return nil
-            --         end,
-            --     },
-            -- capabilities = capabilities,
-            -- settings = {
-            --     pyright = {
-            --         -- Using Ruff's import organizer
-            --         disableOrganizeImports = true,
-            --     },
-            --     python = {
-            --         analysis = {
-            --             -- Ignore all files for analysis to exclusively use Ruff for linting
-            --             ignore = { '*' },
-            --         },
-            --     },
-            -- },
-            -- },
-
             html = {
                 capabilities = capabilities,
             },
