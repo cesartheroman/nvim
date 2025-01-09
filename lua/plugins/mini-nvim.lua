@@ -4,7 +4,7 @@ return {
     'echasnovski/mini.nvim',
     config = function()
         -- Simple and easy statusline.
-        local statusline = require('mini.statusline')
+        local statusline = require 'mini.statusline'
         -- set use_icons to true if you have a Nerd Font
         statusline.setup({ use_icons = vim.g.have_nerd_font })
 
@@ -17,21 +17,21 @@ return {
         end
         ---@diagnostic disable-next-line: duplicate-set-field
         statusline.section_filename = function()
-            local filename = vim.fn.expand('%:t')
-            local parent_dir = vim.fn.expand('%:h:t')
+            local filename = vim.fn.expand '%:t'
+            local parent_dir = vim.fn.expand '%:h:t'
             return parent_dir .. '/' .. filename
         end
 
         ---@diagnostic disable-next-line: duplicate-set-field
         statusline.inactive = function()
-            local filename = vim.fn.expand('%:t')
-            local parent_dir = vim.fn.expand('%:h:t')
+            local filename = vim.fn.expand '%:t'
+            local parent_dir = vim.fn.expand '%:h:t'
             return parent_dir .. '/' .. filename
         end
         -- Active indent guide and indent text objects. When you're browsing
         -- code, this highlights the current level of indentation, and animates
         -- the highlighting.
-        local indentscope = require('mini.indentscope')
+        local indentscope = require 'mini.indentscope'
         indentscope.setup({
             symbol = '│',
             options = { try_as_border = true },

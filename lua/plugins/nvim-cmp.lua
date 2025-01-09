@@ -10,9 +10,7 @@ return {
                 -- Build Step is needed for regex support in snippets.
                 -- This step is not supported in many windows environments.
                 -- Remove the below condition to re-enable on windows.
-                if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
-                    return
-                end
+                if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then return end
                 return 'make install_jsregexp'
             end)(),
             dependencies = {
@@ -41,9 +39,9 @@ return {
     },
     config = function()
         -- See `:help cmp`
-        local cmp = require('cmp')
-        local luasnip = require('luasnip')
-        local lspkind = require('lspkind')
+        local cmp = require 'cmp'
+        local luasnip = require 'luasnip'
+        local lspkind = require 'lspkind'
         luasnip.config.setup({})
 
         -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
@@ -128,10 +126,10 @@ return {
             formatting = {
                 format = function(entry, item)
                     -- Add the LSP source name to the menu for `nvim_lsp`
-                    if entry.source.name == 'nvim_lsp' then
-                        ---@diagnostic disable-next-line: undefined-field
-                        item.menu = '[' .. (entry.source.client and entry.source.client.name or 'LSP') .. ']'
-                    end
+                    -- if entry.source.name == 'nvim_lsp' then
+                    --     ---@diagnostic disable-next-line: undefined-field
+                    --     item.menu = '[' .. (entry.source.client and entry.source.client.name or 'LSP') .. ']'
+                    -- end
 
                     -- Apply the lspkind formatting
                     local formatted_item = lspkind.cmp_format({
