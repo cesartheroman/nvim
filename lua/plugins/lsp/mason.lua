@@ -10,9 +10,9 @@ return {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
     config = function()
-        local mason = require('mason')
-        local mason_lspconfig = require('mason-lspconfig')
-        local mason_tool_installer = require('mason-tool-installer')
+        local mason = require 'mason'
+        local mason_lspconfig = require 'mason-lspconfig'
+        local mason_tool_installer = require 'mason-tool-installer'
 
         -- Enable mason and configure icons
         mason.setup({
@@ -30,8 +30,8 @@ return {
             ensure_installed = {
                 'lua_ls',
                 'ts_ls',
-                'pyright',
                 'gopls',
+                'intelephense',
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -45,7 +45,6 @@ return {
                 'eslint_d', -- js linter
                 'isort', -- python import sort
                 'black', -- python formatter
-                'ruff',
             },
         })
     end,

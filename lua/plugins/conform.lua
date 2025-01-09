@@ -2,7 +2,7 @@ return {
     'stevearc/conform.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-        local conform = require('conform')
+        local conform = require 'conform'
 
         conform.setup({
             formatters_by_ft = {
@@ -10,11 +10,24 @@ return {
                 typescript = { 'prettier' },
                 javascriptreact = { 'prettier' },
                 typescriptreact = { 'prettier' },
+                html = { 'prettier' },
                 go = { 'gofmt' },
                 python = { 'isort', 'black' },
                 css = { 'prettier' },
                 yaml = { 'yamlfix' },
                 lua = { 'stylua' },
+                php = { 'phpcbf' },
+            },
+            -- Blade formatter for Laravel
+            blade = {
+                {
+                    'blade-formatter',
+                    args = {
+                        '--write',
+                        '--wrap-attributes=force-aligned',
+                        '--wrap-line-length=120',
+                    },
+                },
             },
         })
 

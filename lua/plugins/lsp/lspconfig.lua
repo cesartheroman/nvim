@@ -129,7 +129,7 @@ return {
         --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-        local util = require('lspconfig/util')
+        local util = require 'lspconfig/util'
 
         --  Add any additional override configuration in the following tables. Available keys are:
         --  - cmd (table): Override the default command used to start the server
@@ -177,6 +177,26 @@ return {
                 root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
             },
 
+            intelephense = {
+                capabilities = capabilities,
+                cmd = { 'intelephense', '--stdio' },
+                filetypes = { 'php' },
+                root_dir = util.root_pattern('composer.json', '.git'),
+                settings = {
+                    intelephense = {
+                        diagnostics = {
+                            enable = true,
+                            undefinedVariables = true,
+                            undefinedTypes = true,
+                            undefinedFunctions = true,
+                            undefinedConstants = true,
+                            undefinedProperties = true,
+                            undefinedMethods = true,
+                        },
+                    },
+                },
+            },
+
             html = {
                 capabilities = capabilities,
             },
@@ -195,6 +215,7 @@ return {
                     'html',
                     'typescriptreact',
                     'javascriptreact',
+                    'php',
                     'css',
                     'sass',
                     'scss',
@@ -225,26 +246,7 @@ return {
                     local server = servers[server_name] or {}
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 
-                    -- Customize specific servers
-                    if server_name == 'pyright' then
-                        server.settings = {
-                            python = {
-                                analysis = {
-                                    autoSearchPaths = true,
-                                    useLibraryCodeForTypes = true,
-                                    diagnosticMode = 'workspace',
-                                    typeCheckingMode = 'basic',
-                                    autoImportCompletions = true,
-                                },
-                            },
-                        }
-                        server.handlers = {
-                            -- Disable hover for Pyright
-                            ['textDocument/hover'] = function(_, _, _)
-                                return nil
-                            end,
-                        }
-                    elseif server_name == 'jedi_language_server' then
+                    if server_name == 'jedi_language_server' then
                         -- Disable diagnostics for Jedi-LSP
                         server.on_attach = function(client)
                             client.server_capabilities.diagnosticProvider = false
