@@ -30,8 +30,8 @@ return {
             ensure_installed = {
                 'lua_ls',
                 'ts_ls',
-                -- 'pyright',
-                -- 'jedi_language_server',
+                'pyright',
+                'jedi_language_server',
                 'gopls',
                 'intelephense',
             },

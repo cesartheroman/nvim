@@ -175,14 +175,14 @@ return {
                 settings = {
                     python = {
                         analysis = {
-                            typeCheckingMode = 'basic', -- Set to "basic" or "strict" for more checks
-                            diagnosticMode = 'workspace', -- Enable diagnostics for the workspace
-                            autoImportCompletions = true, -- Enable auto-import completions
+                            typeCheckingMode = 'basic',
+                            diagnosticMode = 'workspace',
+                            autoImportCompletions = true,
                         },
                     },
                 },
                 on_attach = function(client)
-                    client.server_capabilities.hoverProvider = false
+                    client.server_capabilities.hoverProvider = false -- Disable Pyright's hover
                 end,
             },
 
@@ -191,20 +191,27 @@ return {
                 settings = {
                     jedi = {
                         diagnostics = {
-                            enable = false, -- Disable all diagnostics
-                            undefinedFunctions = false, -- Disable undefined function checks
-                            undefinedVariables = false, -- Disable undefined variable checks
+                            enable = false, -- Disable diagnostics
+                            undefinedFunctions = false,
+                            undefinedVariables = false,
                         },
                         completion = {
                             enable = false, -- Disable completions
                         },
                         hover = {
-                            enable = true, -- Enable hover documentation
+                            enable = true, -- Keep hover enabled
                         },
                     },
                 },
-                on_attach = function(_, bufnr)
-                    -- Set up key mapping for hover documentation
+                on_attach = function(client, bufnr)
+                    -- Disable everything except hover
+                    client.server_capabilities.completionProvider = false
+                    client.server_capabilities.definitionProvider = false
+                    client.server_capabilities.referencesProvider = false
+                    client.server_capabilities.renameProvider = false
+                    client.server_capabilities.signatureHelpProvider = false
+
+                    -- Set up hover keymap
                     vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Documentation' })
                 end,
             },
