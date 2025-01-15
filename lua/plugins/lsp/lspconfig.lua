@@ -170,6 +170,45 @@ return {
                 end,
             },
 
+            pyright = {
+                capabilities = capabilities,
+                settings = {
+                    python = {
+                        analysis = {
+                            typeCheckingMode = 'basic', -- Set to "basic" or "strict" for more checks
+                            diagnosticMode = 'workspace', -- Enable diagnostics for the workspace
+                            autoImportCompletions = true, -- Enable auto-import completions
+                        },
+                    },
+                },
+                on_attach = function(client)
+                    client.server_capabilities.hoverProvider = false
+                end,
+            },
+
+            jedi_language_server = {
+                capabilities = capabilities,
+                settings = {
+                    jedi = {
+                        diagnostics = {
+                            enable = false, -- Disable all diagnostics
+                            undefinedFunctions = false, -- Disable undefined function checks
+                            undefinedVariables = false, -- Disable undefined variable checks
+                        },
+                        completion = {
+                            enable = false, -- Disable completions
+                        },
+                        hover = {
+                            enable = true, -- Enable hover documentation
+                        },
+                    },
+                },
+                on_attach = function(_, bufnr)
+                    -- Set up key mapping for hover documentation
+                    vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = bufnr, desc = 'Hover Documentation' })
+                end,
+            },
+
             gopls = {
                 capabilities = capabilities,
                 cmd = { 'gopls' },
@@ -217,9 +256,6 @@ return {
                     'javascriptreact',
                     'php',
                     'css',
-                    'sass',
-                    'scss',
-                    'less',
                 },
             },
         }
@@ -246,12 +282,6 @@ return {
                     local server = servers[server_name] or {}
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
 
-                    if server_name == 'jedi_language_server' then
-                        -- Disable diagnostics for Jedi-LSP
-                        server.on_attach = function(client)
-                            client.server_capabilities.diagnosticProvider = false
-                        end
-                    end
                     require('lspconfig')[server_name].setup(server)
                 end,
             },

@@ -6,6 +6,7 @@ return {
 
         conform.setup({
             formatters_by_ft = {
+                lua = { 'stylua' },
                 javascript = { 'prettier' },
                 typescript = { 'prettier' },
                 javascriptreact = { 'prettier' },
@@ -15,19 +16,8 @@ return {
                 python = { 'isort', 'black' },
                 css = { 'prettier' },
                 yaml = { 'yamlfix' },
-                lua = { 'stylua' },
                 php = { 'phpcbf' },
-            },
-            -- Blade formatter for Laravel
-            blade = {
-                {
-                    'blade-formatter',
-                    args = {
-                        '--write',
-                        '--wrap-attributes=force-aligned',
-                        '--wrap-line-length=120',
-                    },
-                },
+                blade = { 'blade-formatter' },
             },
         })
 
