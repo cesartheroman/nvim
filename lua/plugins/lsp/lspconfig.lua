@@ -183,6 +183,10 @@ return {
                 },
                 on_attach = function(client)
                     client.server_capabilities.hoverProvider = false -- Disable Pyright's hover
+                    client.server_capabilities.completionProvider = {
+                        triggerCharacters = { '.', '_' }, -- Keep basic completion trigger
+                        resolveProvider = false, -- Disable resolution for simpler completions
+                    }
                 end,
             },
 
