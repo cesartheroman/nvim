@@ -15,7 +15,6 @@ return {
             ['<leader>l'] = { desc = 'list session' },
             ['<leader>t'] = { desc = 'todo comments' },
             ['<leader>v'] = { desc = 'vim maximize' },
-            ['<leader>x'] = { desc = 'trouble' },
             ['<leader>z'] = { desc = 'code folding' },
         },
     },

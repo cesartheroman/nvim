@@ -67,16 +67,14 @@ vim.keymap.set('n', '<leader>se', '<C-w>=', { desc = 'Make splits equal size' })
 vim.keymap.set('n', '<leader>sx', '<cmd>close<CR>', { desc = 'Close current split' })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '[d', function()
+    vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', function()
+    vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>ee', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- todo trouble
-vim.keymap.set('n', '<leader>tt', ':TodoTrouble<CR>', { desc = '[t]odo [t]ouble' })
-vim.keymap.set('n', '<leader>tf', ':TodoTelescope<CR>', { desc = '[t]elescope [f]ind todos' })
-vim.keymap.set('n', '<leader>tl', ':TodoLocList<CR>', { desc = '[t]odo [l]oclist' })
-vim.keymap.set('n', '<leader>tq', ':TodoQuickFix<CR>', { desc = '[t]odo [q]uickfix' })
 
 vim.keymap.set('n', ']t', function()
     require('todo-comments').jump_next()

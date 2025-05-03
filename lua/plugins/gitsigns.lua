@@ -24,7 +24,7 @@ return {
                 { buffer = bufnr, desc = '[G]it [B]lame' }
             )
             vim.keymap.set('n', '<leader>gsh', gitsigns.stage_hunk, { desc = '[G]it [S]tage [H]unk' })
-            vim.keymap.set('n', '<leader>gsu', gitsigns.undo_stage_hunk, { desc = '[G]it [S]tage [U]ndo' })
+            vim.keymap.set('n', '<leader>gsu', gitsigns.reset_hunk, { desc = '[G]it [S]tage [U]ndo' })
             vim.keymap.set('n', '<leader>gsb', gitsigns.stage_buffer, { desc = '[G]it [S]tage [B]uffer' })
 
             vim.keymap.set('n', '<leader>gl', function()
@@ -55,9 +55,7 @@ return {
                 local commit_message = vim.fn.system('git show --no-patch --format=%B ' .. commit_hash)
 
                 -- Display the commit message in a popup
-                vim.ui.input({ prompt = 'Git Comit Message:', default = commit_message }, function(input)
-                    -- Input is not used; just for showing the popup
-                end)
+                vim.ui.input({ prompt = 'Git Commit Message:', default = commit_message }, function() end)
             end, { desc = 'Show Git Blame Commit Message' })
         end,
     },
