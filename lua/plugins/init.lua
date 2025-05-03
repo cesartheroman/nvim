@@ -3,7 +3,6 @@ return {
     'christoomey/vim-tmux-navigator',
     'tpope/vim-fugitive',
     'stevearc/dressing.nvim',
-    -- 'github/copilot.vim',
     { 'folke/tokyonight.nvim', event = 'User LazyColorscheme' },
     { 'catppuccin/nvim', event = 'User LazyColorscheme' },
     {

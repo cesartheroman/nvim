@@ -1,42 +1,52 @@
 return {
     'ThePrimeagen/harpoon',
+    branch = 'harpoon2',
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
     config = function()
-        local mark = require 'harpoon.mark'
-        local ui = require 'harpoon.ui'
-
+        local harpoon = require 'harpoon'
+        harpoon:setup()
         local keymap = vim.keymap
 
         -- For adding file and opening up Harpoon UI
-        keymap.set('n', '<leader>hh', ui.toggle_quick_menu, { desc = 'UI' })
-        keymap.set('n', '<leader>ha', mark.add_file, { desc = 'Add file ' })
+        keymap.set('n', '<leader>ha', function()
+            harpoon:list():add()
+        end, { desc = 'Add file ' })
+        keymap.set('n', '<leader>hh', function()
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+        end, { desc = 'Harpoon UI' })
 
         -- For navigating through Harpooned files
         keymap.set('n', '<leader>h1', function()
-            ui.nav_file(1)
+            harpoon:list():select(1)
         end)
         keymap.set('n', '<leader>h2', function()
-            ui.nav_file(2)
+            harpoon:list():select(2)
         end)
         keymap.set('n', '<leader>h3', function()
-            ui.nav_file(3)
+            harpoon:list():select(3)
         end)
         keymap.set('n', '<leader>h4', function()
-            ui.nav_file(4)
+            harpoon:list():select(4)
         end)
         keymap.set('n', '<leader>h5', function()
-            ui.nav_file(5)
+            harpoon:list():select(5)
         end)
         keymap.set('n', '<leader>h6', function()
-            ui.nav_file(6)
+            harpoon:list():select(6)
         end)
         keymap.set('n', '<leader>h7', function()
-            ui.nav_file(7)
+            harpoon:list():select(7)
         end)
         keymap.set('n', '<leader>h8', function()
-            ui.nav_file(8)
+            harpoon:list():select(8)
+        end)
+        keymap.set('n', '<leader>h9', function()
+            harpoon:list():select(9)
+        end)
+        keymap.set('n', '<leader>h0', function()
+            harpoon:list():select(0)
         end)
     end,
 }
