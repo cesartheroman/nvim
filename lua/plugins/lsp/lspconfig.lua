@@ -166,7 +166,8 @@ return {
             ts_ls = {
                 capabilities = capabilities,
                 on_attach = function(client)
-                    client.server_capabilities.documentFormattingProvider = false -- Prevent LSP from auto-formatting
+                    -- Prevent LSP from auto-formatting, leave to Prettier
+                    client.server_capabilities.documentFormattingProvider = false
                 end,
             },
 
@@ -182,7 +183,8 @@ return {
                     },
                 },
                 on_attach = function(client)
-                    client.server_capabilities.hoverProvider = false -- Disable Pyright's hover
+                    -- Disable Pyright's hover in favor of jedi_language_server
+                    client.server_capabilities.hoverProvider = false
                     client.server_capabilities.completionProvider = {
                         triggerCharacters = { '.', '_' }, -- Keep basic completion trigger
                         resolveProvider = false, -- Disable resolution for simpler completions
@@ -194,16 +196,18 @@ return {
                 capabilities = capabilities,
                 settings = {
                     jedi = {
+                        hover = {
+                            enable = true,
+                        },
                         diagnostics = {
-                            enable = false, -- Disable diagnostics
+                            -- Disable diagnostics in favor of pyright's
+                            enable = false,
                             undefinedFunctions = false,
                             undefinedVariables = false,
                         },
                         completion = {
-                            enable = false, -- Disable completions
-                        },
-                        hover = {
-                            enable = true, -- Keep hover enabled
+                            -- Disable completions in favor of pyright's
+                            enable = false,
                         },
                     },
                 },
@@ -227,6 +231,51 @@ return {
                 root_dir = util.root_pattern('go.work', 'go.mod', '.git'),
             },
 
+            ruby_lsp = {
+                mason = false,
+                cmd = { '/Users/davidroman/.rbenv/shims/ruby-lsp' },
+                settings = {
+                    formatter = 'standardrb',
+                    linters = { 'standardrb' },
+                    addonSettings = {
+                        ['Ruby LSP Rails'] = {
+                            -- Example: Disable the prompt about pending migrations on server start
+                            enablePendingMigrationsPrompt = false,
+                        },
+                    },
+                    capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
+                        -- Disable in favor of solargraph's completion capabilities
+                        completionProvider = false,
+                        textDocument = {
+                            -- Explicitly request UTF-8
+                            positionEncoding = { 'utf-8' },
+                        },
+                    }),
+                },
+            },
+
+            solargraph = {
+                cmd = { 'solargraph', 'stdio' },
+                filetypes = { 'ruby', 'eruby' },
+                root_dir = require('lspconfig/util').root_pattern('Gemfile', '.git'),
+                settings = {
+                    solargraph = {
+                        -- Disable everything in favor of ruby_lsp, except completion
+                        completion = true,
+                        diagnostics = false,
+                        formatting = false,
+                        autoformat = false,
+                        rubocop = { enabled = false },
+                    },
+                },
+                capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
+                    textDocument = {
+                        -- Explicitly request UTF-8
+                        positionEncoding = { 'utf-8' },
+                    },
+                }),
+            },
+
             intelephense = {
                 capabilities = capabilities,
                 cmd = { 'intelephense', '--stdio' },
@@ -245,55 +294,6 @@ return {
                         },
                     },
                 },
-            },
-
-            ruby_lsp = {
-                mason = false,
-                cmd = { '/Users/davidroman/.rbenv/shims/ruby-lsp' },
-                -- Configure Ruby LSP options (formatter, linter, Rails add-on)
-                settings = {
-                    -- Use the 'standard' gem for formatting. Requires `gem install standard`
-                    formatter = 'standardrb',
-                    -- Use the 'standard' gem for linting. Requires `gem install standard`
-                    linters = { 'standardrb' },
-                    -- Configure the Rails add-on. Requires `gem install ruby-lsp-rails`
-                    addonSettings = {
-                        ['Ruby LSP Rails'] = {
-                            -- Example: Disable the prompt about pending migrations on server start
-                            enablePendingMigrationsPrompt = false,
-                        },
-                    },
-                    -- Disable in favor of solargraph's completion capabilities
-                    capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
-                        completionProvider = false,
-                        textDocument = {
-                            -- Explicitly request UTF-8
-                            positionEncoding = { 'utf-8' },
-                        },
-                    }),
-                },
-            },
-
-            solargraph = {
-                cmd = { 'solargraph', 'stdio' },
-                filetypes = { 'ruby', 'eruby' },
-                root_dir = require('lspconfig/util').root_pattern('Gemfile', '.git'),
-                settings = {
-                    solargraph = {
-                        -- Disable everything except completion
-                        completion = true,
-                        diagnostics = false,
-                        formatting = false,
-                        autoformat = false,
-                        rubocop = { enabled = false },
-                    },
-                },
-                capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
-                    textDocument = {
-                        -- Explicitly request UTF-8
-                        positionEncoding = { 'utf-8' },
-                    },
-                }),
             },
 
             html = {
@@ -325,9 +325,6 @@ return {
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
         local ensure_installed = vim.tbl_keys(servers or {})
-        vim.list_extend(ensure_installed, {
-            'stylua', -- Used to format Lua code
-        })
         require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
         require('mason-lspconfig').setup({
