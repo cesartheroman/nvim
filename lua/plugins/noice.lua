@@ -2,14 +2,20 @@ return {
     'folke/noice.nvim',
     dependencies = {
         'MunifTanjim/nui.nvim',
-        'rcarriga/nvim-notify',
+        {
+            'rcarriga/nvim-notify',
+            -- Use the ColorScheme event for nvim-notify's setup within the dependency definition
+            event = 'ColorScheme',
+            opts = {
+                background_colour = '#000000',
+                top_down = false,
+            },
+            config = function(_, opts)
+                require('notify').setup(opts)
+            end,
+        },
     },
     config = function()
-        require('notify').setup({
-            -- stages = 'static',
-            top_down = false,
-        })
-
         require('noice').setup({
             lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
