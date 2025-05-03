@@ -46,11 +46,11 @@ return {
         -- For formatting
         mason_tool_installer.setup({
             ensure_installed = {
-                'stylua', 
-                'prettier', 
+                'stylua',
+                'prettier',
                 'eslint_d',
                 'isort',
-                'black', 
+                'black',
                 'standardrb',
                 'solargraph',
             },

@@ -127,20 +127,28 @@ return {
             -- configure lspkind for vs-code like pictograms in completion menu
             formatting = {
                 format = function(entry, item)
-                    -- Add the LSP source name to the menu for `nvim_lsp`
-                    -- if entry.source.name == 'nvim_lsp' then
-                    --     ---@diagnostic disable-next-line: undefined-field
-                    --     item.menu = '[' .. (entry.source.client and entry.source.client.name or 'LSP') .. ']'
-                    -- end
-
-                    -- Apply the lspkind formatting
-                    local formatted_item = lspkind.cmp_format({
-                        maxwidth = 100,
+                    local lspkind_opts = {
+                        mode = 'symbol_text',
+                        maxwidth = 50,
                         ellipsis_char = '...',
-                    })(entry, item)
+                    }
 
-                    -- Merge custom menu with lspkind formatting
-                    return formatted_item
+                    if vim.bo.filetype == 'ruby' and (item.kind == 'Method') then
+                        local paren_pos = string.find(item.abbr, '(', 1, true)
+
+                        if paren_pos then
+                            item.abbr = string.sub(item.abbr, 1, paren_pos - 1)
+                            item.abbr = item.abbr:gsub('%s+$', '')
+                        end
+
+                        lspkind_opts = {
+                            mode = 'symbol_text',
+                            maxwidth = 25,
+                            ellipsis_char = '...',
+                        }
+                    end
+
+                    return lspkind.cmp_format(lspkind_opts)(entry, item)
                 end,
             },
 
