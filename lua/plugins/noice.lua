@@ -25,6 +25,10 @@ return {
                     ['cmp.entry.get_documentation'] = true, -- requires hrsh7th/nvim-cmp
                 },
             },
+            messages = {
+                enabled = true,
+                view_search = 'virtualtext',
+            },
             routes = {
                 {
                     filter = {
@@ -32,6 +36,13 @@ return {
                         find = 'No information available',
                     },
                     opts = { skip = true },
+                },
+                {
+                    filter = {
+                        event = 'msg_show',
+                        find = 'Defining diagnostic signs with :sign%-define or sign_define%(%) is deprecated',
+                        opts = { skip = true },
+                    },
                 },
             },
             -- you can enable a preset for easier configuration
