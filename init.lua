@@ -13,7 +13,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require 'config'
+require 'core'
 require('lazy').setup('plugins', {
     import = 'plugins.lsp',
     rocks = { enabled = false },
