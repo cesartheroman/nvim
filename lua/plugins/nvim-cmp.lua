@@ -143,6 +143,13 @@ return {
                     return formatted_item
                 end,
             },
+
+            window = {
+                documentation = {
+                    border = 'rounded',
+                    winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,Search:None',
+                },
+            },
         })
     end,
 }
