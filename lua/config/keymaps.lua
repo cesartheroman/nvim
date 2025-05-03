@@ -94,7 +94,6 @@ vim.keymap.set('n', '<C-q>', ':q<CR>', { noremap = true, silent = true })
 vim.keymap.set('i', '<C-q>', '<Esc>:q<CR>a', { noremap = true, silent = true })
 vim.keymap.set('v', '<C-q>', '<Esc>:q<CR>gv', { noremap = true, silent = true })
 
-
 vim.keymap.set('n', '<leader>ux', function()
     -- Find the most recent buffer that is still ilsted but not curretnly visible
     local buffers = vim.fn.getbufinfo({ buflisted = 1 })
