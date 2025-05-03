@@ -38,5 +38,11 @@ return {
         keymap.set('n', '<leader>h8', function()
             ui.nav_file(8)
         end)
+        keymap.set('n', '<leader>h9', function()
+            ui.nav_file(9)
+        end)
+        keymap.set('n', '<leader>h0', function()
+            ui.nav_file(10)
+        end)
     end,
 }
