@@ -5,8 +5,6 @@ return {
     --
     --  You can press `g?` for help in this menu.
     'williamboman/mason.nvim',
-    -- Load Mason only when needed
-    cmd = { 'Mason', 'MasonInstall', 'MasonUpdate' },
     dependencies = {
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -36,8 +34,6 @@ return {
                 'jedi_language_server',
                 'gopls',
                 'intelephense',
-                'solargraph',
-                'ruby_lsp',
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -51,8 +47,6 @@ return {
                 'eslint_d', -- js linter
                 'isort', -- python import sort
                 'black', -- python formatter
-                'standardrb',
-                'solargraph',
             },
         })
     end,

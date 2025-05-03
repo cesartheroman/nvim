@@ -93,7 +93,7 @@ return {
 
                 -- Display the commit message in a popup
                 vim.ui.input(
-                    { prompt = 'Git Commit Message:', default = commit_message },
+                    { prompt = 'Git Comit Message:', default = commit_message },
                     function(input)
                         -- Input is not used; just for showing the popup
                     end

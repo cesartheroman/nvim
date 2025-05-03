@@ -1,3 +1,5 @@
+require 'core'
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
@@ -13,8 +15,12 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require 'config'
-require('lazy').setup('plugins', {
-    import = 'plugins.lsp',
-    rocks = { enabled = false },
+require('lazy').setup({
+    { import = 'plugins' },
+    { import = 'plugins.lsp' },
 })
+require('plugins-custom/greet').setup({
+    name = 'David',
+})
+require('plugins-custom/myplugin').setup()
+require('plugins-custom/quicknotes').setup()

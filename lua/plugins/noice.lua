@@ -1,17 +1,16 @@
 return {
     'folke/noice.nvim',
-    event = { 'BufReadPost' },
     dependencies = {
         'MunifTanjim/nui.nvim',
         'rcarriga/nvim-notify',
     },
     config = function()
         require('notify').setup({
+            -- stages = 'static',
             top_down = false,
         })
 
         require('noice').setup({
-            background_colour = "#000000",
             lsp = {
                 -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
                 override = {

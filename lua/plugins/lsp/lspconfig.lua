@@ -1,6 +1,6 @@
 return {
+    -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
     dependencies = {
         -- Automatically install LSPs and related tools to stdpath for Neovim
         'williamboman/mason.nvim',
@@ -17,6 +17,8 @@ return {
     },
     config = function()
         -- Brief aside: **What is LSP?**
+        --
+        -- LSP is an initialism you've probably heard, but might not understand what it is.
         --
         -- LSP stands for Language Server Protocol. It's a protocol that helps editors
         -- and language tooling communicate in a standardized fashion.
@@ -43,6 +45,7 @@ return {
         --    That is to say, every time a new file is opened that is associated with
         --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
         --    function will be executed to configure the current buffer
+
         vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
             callback = function(event)
@@ -99,19 +102,15 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client:supports_method('textDocument/documentHighlight') then
+                if client and client.server_capabilities.documentHighlightProvider then
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         buffer = event.buf,
-                        callback = function()
-                            vim.lsp.buf.document_highlight()
-                        end,
+                        callback = vim.lsp.buf.document_highlight,
                     })
 
                     vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
                         buffer = event.buf,
-                        callback = function()
-                            vim.lsp.buf.clear_references()
-                        end,
+                        callback = vim.lsp.buf.clear_references,
                     })
                 end
 
@@ -186,7 +185,7 @@ return {
                     client.server_capabilities.hoverProvider = false -- Disable Pyright's hover
                     client.server_capabilities.completionProvider = {
                         triggerCharacters = { '.', '_' }, -- Keep basic completion trigger
-                        resolveProvider = true,
+                        resolveProvider = false, -- Disable resolution for simpler completions
                     }
                 end,
             },
@@ -248,45 +247,6 @@ return {
                 },
             },
 
-            ruby_lsp = {
-                mason = false,
-                cmd = { '/Users/davidroman/.rbenv/shims/ruby-lsp' },
-                -- Configure Ruby LSP options (formatter, linter, Rails add-on)
-                settings = {
-                    -- Use the 'standard' gem for formatting. Requires `gem install standard`
-                    formatter = 'standardrb',
-                    -- Use the 'standard' gem for linting. Requires `gem install standard`
-                    linters = { 'standardrb' },
-                    -- Configure the Rails add-on. Requires `gem install ruby-lsp-rails`
-                    addonSettings = {
-                        ['Ruby LSP Rails'] = {
-                            -- Example: Disable the prompt about pending migrations on server start
-                            enablePendingMigrationsPrompt = false,
-                        },
-                    },
-                    -- Disable in favor of solargraph's completion capabilities
-                    capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
-                        completionProvider = false,
-                    }),
-                },
-            },
-
-            solargraph = {
-                cmd = { 'solargraph', 'stdio' },
-                filetypes = { 'ruby', 'eruby' },
-                root_dir = require('lspconfig/util').root_pattern('Gemfile', '.git'),
-                settings = {
-                    solargraph = {
-                        -- Disable everything except completion
-                        completion = true,
-                        diagnostics = false,
-                        formatting = false,
-                        autoformat = false,
-                        rubocop = { enabled = false },
-                    },
-                },
-            },
-
             html = {
                 capabilities = capabilities,
             },
@@ -311,6 +271,12 @@ return {
             },
         }
 
+        -- Ensure the servers and tools above are installed
+        --  To check the current status of installed tools and/or manually install
+        --  other tools, you can run
+        --    :Mason
+        --
+        --  You can press `g?` for help in this menu.
         require('mason').setup()
 
         -- You can add other tools here that you want Mason to install

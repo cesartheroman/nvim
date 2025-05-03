@@ -15,8 +15,9 @@ return {
                 go = { 'gofmt' },
                 python = { 'isort', 'black' },
                 css = { 'prettier' },
+                yaml = { 'yamlfix' },
+                php = { 'phpcbf' },
                 blade = { 'blade-formatter' },
-                ruby = { 'standardrb' },
             },
         })
 
