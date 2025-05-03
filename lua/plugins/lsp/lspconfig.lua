@@ -266,6 +266,10 @@ return {
                     -- Disable in favor of solargraph's completion capabilities
                     capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
                         completionProvider = false,
+                        textDocument = {
+                            -- Explicitly request UTF-8
+                            positionEncoding = { 'utf-8' },
+                        },
                     }),
                 },
             },
@@ -284,6 +288,12 @@ return {
                         rubocop = { enabled = false },
                     },
                 },
+                capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
+                    textDocument = {
+                        -- Explicitly request UTF-8
+                        positionEncoding = { 'utf-8' },
+                    },
+                }),
             },
 
             html = {
