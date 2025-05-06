@@ -9,10 +9,18 @@ return {
             end,
             desc = '[l]ist [s]essions',
         },
+        {
+            '<leader>ss',
+            function()
+                require('auto-session').SaveSession()
+            end,
+            desc = '[l]ist [s]essions',
+        },
     },
     config = function()
         require('auto-session').setup({
             log_level = 'error',
+            auto_save = false,
             session_lens = {
                 buftypes_to_ignore = {},
                 load_on_setup = true,
