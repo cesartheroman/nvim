@@ -55,6 +55,6 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
         vim.bo.tabstop = tab_width
         vim.bo.shiftwidth = tab_width
         vim.bo.softtabstop = tab_width
-        vim.bo.expandtab = (config.useTabs == nil or config.useTabs == false)
+        vim.bo.expandtab = not config.useTabs
     end,
 })

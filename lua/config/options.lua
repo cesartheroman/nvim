@@ -77,6 +77,7 @@ vim.opt.backspace = 'indent,eol,start'
 vim.opt.wrap = true
 
 vim.opt.termguicolors = true
+vim.opt.hlsearch = true
 
 -- Set fold settings
 -- These options were reccommended by nvim-ufo

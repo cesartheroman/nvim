@@ -8,7 +8,6 @@ vim.g.maplocalleader = ' '
 vim.g.have_nerd_font = true
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Use 'jk' to exist Insert mode
@@ -37,9 +36,6 @@ vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true })
 
 -- Delete single char w/o copying into register
 vim.keymap.set('n', 'x', '"_x', { noremap = true, silent = true })
-
--- Toggle line wrapping
--- vim.keymap.set('n', '<leader>lw', '<cmd>set wrap!<CR>', opts)
 
 -- Stay in indent mode
 vim.keymap.set('v', '<', '<gv', { noremap = true, silent = true })
