@@ -1,6 +1,15 @@
 return {
     'rmagatti/auto-session',
     event = 'DirChanged',
+    keys = {
+        {
+            '<leader>ls',
+            function()
+                require('auto-session.session-lens').search_session({})
+            end,
+            desc = '[l]ist [s]essions',
+        },
+    },
     config = function()
         require('auto-session').setup({
             log_level = 'error',
@@ -18,14 +27,6 @@ return {
                 },
             },
             suppressed_dirs = { '~/', '~/Projects', '~/Downloads', '/' },
-        })
-
-        -- set mapping for searching a session.
-        vim.keymap.set('n', '<leader>ls', function()
-            require('auto-session.session-lens').search_session({})
-        end, {
-            noremap = true,
-            desc = '[l]ist [s]essions',
         })
 
         -- For better auto-session experience
