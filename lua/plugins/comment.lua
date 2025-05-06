@@ -5,9 +5,9 @@ return {
         'JoosepAlviste/nvim-ts-context-commentstring',
     },
     config = function()
-        local comment = require 'Comment'
+        local comment = require('Comment')
 
-        local ts_context_commentstring = require 'ts_context_commentstring.integrations.comment_nvim'
+        local ts_context_commentstring = require('ts_context_commentstring.integrations.comment_nvim')
 
         comment.setup({
             -- for commenting tsx and jsx files

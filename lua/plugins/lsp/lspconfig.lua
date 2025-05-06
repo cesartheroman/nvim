@@ -192,7 +192,7 @@ return {
                     },
                 },
                 on_attach = function(client)
-                    -- Disable Pyright's hover in favor of jedi_language_server
+                    -- Disable Pyright's hover in favor of jedi_language_server's
                     client.server_capabilities.hoverProvider = false
                     client.server_capabilities.completionProvider = {
                         triggerCharacters = { '.', '_' }, -- Keep basic completion trigger
@@ -208,20 +208,21 @@ return {
                         hover = {
                             enable = true,
                         },
+                        -- Disable diagnostics in favor of pyright's
                         diagnostics = {
-                            -- Disable diagnostics in favor of pyright's
                             enable = false,
                             undefinedFunctions = false,
                             undefinedVariables = false,
                         },
+                        -- Disable completions in favor of pyright's
                         completion = {
-                            -- Disable completions in favor of pyright's
                             enable = false,
                         },
                     },
                 },
                 on_attach = function(client, bufnr)
                     -- Disable everything except hover
+                    -- NOTE: Is this redundant?
                     client.server_capabilities.completionProvider = false
                     client.server_capabilities.definitionProvider = false
                     client.server_capabilities.referencesProvider = false
@@ -329,12 +330,12 @@ return {
             },
         }
 
-        require('mason').setup()
-
+        -- NOTE: Possibly redundant
+        -- require('mason').setup()
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
-        local ensure_installed = vim.tbl_keys(servers or {})
-        require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+        -- local ensure_installed = vim.tbl_keys(servers or {})
+        -- require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
         require('mason-lspconfig').setup({
             handlers = {

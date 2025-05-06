@@ -2,7 +2,7 @@ return {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
-        local lint = require 'lint'
+        local lint = require('lint')
 
         lint.linters_by_ft = {
             javascript = { 'eslint_d' },
@@ -23,7 +23,7 @@ return {
 
         -- Custom parser to silently ignore ESLint configuration errors
         lint.linters.eslint_d.parser = function(output, bufnr)
-            if output:match "Invalid option '--eslintrc'" or output:match 'Could not find config file' then
+            if output:match("Invalid option '--eslintrc'") or output:match('Could not find config file') then
                 -- Silently ignore these errors by returning an empty result
                 return {}
             end

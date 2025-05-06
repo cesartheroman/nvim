@@ -15,9 +15,9 @@ vim.keymap.set('i', 'jk', '<ESC>')
 vim.keymap.set('i', 'kj', '<ESC>')
 
 -- Remap :W to :w
-vim.cmd 'cabbrev W w'
-vim.cmd 'cabbrev Q q'
-vim.cmd 'cabbrev Wq wq'
+vim.cmd('cabbrev W w')
+vim.cmd('cabbrev Q q')
+vim.cmd('cabbrev Wq wq')
 
 -- Copy all
 vim.keymap.set('n', '<C-c>', '<cmd> %y+ <CR>')
@@ -94,7 +94,7 @@ vim.keymap.set('n', '<leader>ux', function()
     for _, buf in ipairs(buffers) do
         if buf.hidden == 1 then
             -- Open the buffer in a new split
-            vim.cmd 'split'
+            vim.cmd('split')
             vim.cmd('buffer ' .. buf.bufnr)
             return
         end

@@ -3,7 +3,6 @@ return {
     'christoomey/vim-tmux-navigator',
     'tpope/vim-fugitive',
     'stevearc/dressing.nvim',
-    -- 'github/copilot.vim',
     { 'folke/tokyonight.nvim', event = 'User LazyColorscheme' },
     { 'catppuccin/nvim', event = 'User LazyColorscheme' },
     {
@@ -14,7 +13,7 @@ return {
     },
     {
         'folke/todo-comments.nvim',
-        event = 'VimEnter',
+        event = 'BufReadPost',
         dependencies = { 'nvim-lua/plenary.nvim' },
         opts = { signs = false },
     },
@@ -22,7 +21,7 @@ return {
         'bluz71/vim-nightfly-colors',
         priority = 1000,
         init = function()
-            vim.cmd.colorscheme 'nightfly'
+            vim.cmd.colorscheme('nightfly')
         end,
     },
 }

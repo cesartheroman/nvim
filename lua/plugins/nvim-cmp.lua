@@ -10,7 +10,7 @@ return {
                 -- Build Step is needed for regex support in snippets.
                 -- This step is not supported in many windows environments.
                 -- Remove the below condition to re-enable on windows.
-                if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then
+                if vim.fn.has('win32') == 1 or vim.fn.executable('make') == 0 then
                     return
                 end
                 return 'make install_jsregexp'
@@ -41,13 +41,11 @@ return {
     },
     config = function()
         -- See `:help cmp`
-        local cmp = require 'cmp'
-        local luasnip = require 'luasnip'
-        local lspkind = require 'lspkind'
-        luasnip.config.setup({})
+        local cmp = require('cmp')
+        local luasnip = require('luasnip')
+        local lspkind = require('lspkind')
 
-        -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-        require('luasnip.loaders.from_vscode').lazy_load()
+        luasnip.config.setup({})
 
         cmp.setup({
             completion = {

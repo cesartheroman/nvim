@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
     group = 'WorkProjectIndent',
     pattern = { '*.js', '*.ts', '*.jsx', '*.tsx' },
     callback = function()
-        local home = os.getenv 'HOME'
+        local home = os.getenv('HOME')
         local work_dir = home .. '/code/projects/work'
         local bufname = vim.api.nvim_buf_get_name(0)
         if bufname == '' or not bufname:match(work_dir) then

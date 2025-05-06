@@ -3,46 +3,34 @@ return {
     dependencies = {
         'nvim-lua/plenary.nvim',
     },
-    config = function()
-        local mark = require 'harpoon.mark'
-        local ui = require 'harpoon.ui'
-
-        local keymap = vim.keymap
-
+    keys = {
         -- For adding file and opening up Harpoon UI
-        keymap.set('n', '<leader>hh', ui.toggle_quick_menu, { desc = 'UI' })
-        keymap.set('n', '<leader>ha', mark.add_file, { desc = 'Add file ' })
-
+        {
+            '<leader>hh',
+            function()
+                require('harpoon.ui').toggle_quick_menu()
+            end,
+            desc = 'UI',
+        },
+        {
+            '<leader>ha',
+            function()
+                require('harpoon.mark').add_file()
+            end,
+            desc = 'Add file ',
+        },
+        -- stylua: ignore start
         -- For navigating through Harpooned files
-        keymap.set('n', '<leader>h1', function()
-            ui.nav_file(1)
-        end)
-        keymap.set('n', '<leader>h2', function()
-            ui.nav_file(2)
-        end)
-        keymap.set('n', '<leader>h3', function()
-            ui.nav_file(3)
-        end)
-        keymap.set('n', '<leader>h4', function()
-            ui.nav_file(4)
-        end)
-        keymap.set('n', '<leader>h5', function()
-            ui.nav_file(5)
-        end)
-        keymap.set('n', '<leader>h6', function()
-            ui.nav_file(6)
-        end)
-        keymap.set('n', '<leader>h7', function()
-            ui.nav_file(7)
-        end)
-        keymap.set('n', '<leader>h8', function()
-            ui.nav_file(8)
-        end)
-        keymap.set('n', '<leader>h9', function()
-            ui.nav_file(9)
-        end)
-        keymap.set('n', '<leader>h0', function()
-            ui.nav_file(10)
-        end)
-    end,
+        { '<leader>h1', function() require('harpoon.ui').nav_file(1) end },
+        { '<leader>h2', function() require('harpoon.ui').nav_file(2) end },
+        { '<leader>h3', function() require('harpoon.ui').nav_file(3) end },
+        { '<leader>h4', function() require('harpoon.ui').nav_file(4) end },
+        { '<leader>h5', function() require('harpoon.ui').nav_file(5) end },
+        { '<leader>h6', function() require('harpoon.ui').nav_file(6) end },
+        { '<leader>h7', function() require('harpoon.ui').nav_file(7) end },
+        { '<leader>h8', function() require('harpoon.ui').nav_file(8) end },
+        { '<leader>h9', function() require('harpoon.ui').nav_file(9) end },
+        { '<leader>h0', function() require('harpoon.ui').nav_file(10) end },
+        -- stylua: ignore end
+    },
 }

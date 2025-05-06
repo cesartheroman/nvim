@@ -1,5 +1,6 @@
 return {
     'rmagatti/auto-session',
+    event = 'DirChanged',
     config = function()
         require('auto-session').setup({
             log_level = 'error',
@@ -20,7 +21,9 @@ return {
         })
 
         -- set mapping for searching a session.
-        vim.keymap.set('n', '<leader>ls', require('auto-session.session-lens').search_session, {
+        vim.keymap.set('n', '<leader>ls', function()
+            require('auto-session.session-lens').search_session({})
+        end, {
             noremap = true,
             desc = '[l]ist [s]essions',
         })

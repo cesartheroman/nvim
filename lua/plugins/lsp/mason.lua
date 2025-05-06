@@ -1,6 +1,5 @@
 return {
-    --  To check the current status of installed tools and/or manually install
-    --  other tools, you can run
+    --  To check the current status of installed tools and/or manually install other tools, you can run
     --    :Mason
     --
     --  You can press `g?` for help in this menu.
@@ -12,12 +11,8 @@ return {
         'WhoIsSethDaniel/mason-tool-installer.nvim',
     },
     config = function()
-        local mason = require 'mason'
-        local mason_lspconfig = require 'mason-lspconfig'
-        local mason_tool_installer = require 'mason-tool-installer'
-
         -- Enable mason and configure icons
-        mason.setup({
+        require('mason').setup({
             ui = {
                 icons = {
                     package_installed = '✓',
@@ -28,7 +23,7 @@ return {
         })
 
         -- Setup mason with list of servers to install
-        mason_lspconfig.setup({
+        require('mason-lspconfig').setup({
             ensure_installed = {
                 'lua_ls',
                 'ts_ls',
@@ -44,7 +39,7 @@ return {
         })
 
         -- For formatting
-        mason_tool_installer.setup({
+        require('mason-tool-installer').setup({
             ensure_installed = {
                 'stylua',
                 'prettier',
