@@ -98,7 +98,7 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
-                if client and client:supports_method 'textDocument/documentHighlight' then
+                if client and client:supports_method('textDocument/documentHighlight') then
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         buffer = event.buf,
                         callback = function()
@@ -113,23 +113,22 @@ return {
                         end,
                     })
                 end
-
-                -- Change the Diagnostic symbols in the sign column (gutter)
-                local signs = { Error = ' ', Warn = ' ', Hint = '󰠠 ', Info = ' ' }
-                for type, icon in pairs(signs) do
-                    local hl = 'DiagnosticSign' .. type
-                    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = '' })
-                end
             end,
         })
 
         vim.diagnostic.config({
             virtual_text = {
                 enable = true,
-                -- prefix = '●',
-                -- spacing = 2,
             },
-            severity_sort = true, -- Sort diagnostics by severity
+            severity_sort = true,
+            signs = {
+                text = {
+                    [vim.diagnostic.severity.ERROR] = ' ',
+                    [vim.diagnostic.severity.WARN] = ' ',
+                    [vim.diagnostic.severity.HINT] = '󰠠 ',
+                    [vim.diagnostic.severity.INFO] = ' ',
+                },
+            },
         })
 
         -- LSP servers and clients are able to communicate to each other what features they support.
@@ -138,7 +137,7 @@ return {
         --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
-        local util = require 'lspconfig/util'
+        local util = require('lspconfig/util')
 
         --  Add any additional override configuration in the following tables. Available keys are:
         --  - cmd (table): Override the default command used to start the server

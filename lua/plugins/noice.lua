@@ -37,13 +37,6 @@ return {
                     },
                     opts = { skip = true },
                 },
-                {
-                    filter = {
-                        event = 'msg_show',
-                        find = 'Defining diagnostic signs with :sign%-define or sign_define%(%) is deprecated',
-                    },
-                    opts = { skip = true },
-                },
             },
             -- you can enable a preset for easier configuration
             presets = {
