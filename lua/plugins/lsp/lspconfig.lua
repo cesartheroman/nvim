@@ -9,10 +9,6 @@ return {
         -- Useful status updates for LSP.
         --  `opts = {}` is the same as calling `require('fidget').setup({})`
         { 'j-hui/fidget.nvim', opts = {} },
-
-        -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
-        -- used for completion, annotations and signatures of Neovim apis
-        { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
         -- Brief aside: **What is LSP?**
@@ -151,22 +147,22 @@ return {
                 capabilities = capabilities,
                 settings = {
                     Lua = {
+                        runtime = {
+                            -- Tell the language server which version of Lua you're using
+                            -- (most likely LuaJIT in the case of Neovim)
+                            version = 'LuaJIT',
+                        },
                         completion = {
                             callSnippet = 'Replace',
                         },
                         -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
                         diagnostics = { disable = { 'missing-fields', 'inject-field' }, globals = 'vim' },
                     },
+                    workspace = {
+                        -- Make the server aware of Neovim runtime files
+                        library = vim.api.nvim_get_runtime_file('', true),
+                    },
                 },
-                on_attach = function(client, bufnr)
-                    if client.name == 'lua_ls' then
-                        vim.bo[bufnr].tabstop = 4
-                        vim.bo[bufnr].shiftwidth = 4
-                        vim.bo[bufnr].softtabstop = 4
-                        vim.bo[bufnr].autoindent = true
-                        vim.bo[bufnr].expandtab = true
-                    end
-                end,
             },
 
             -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -221,7 +217,6 @@ return {
                 },
                 on_attach = function(client, bufnr)
                     -- Disable everything except hover
-                    -- NOTE: Is this redundant?
                     client.server_capabilities.completionProvider = false
                     client.server_capabilities.definitionProvider = false
                     client.server_capabilities.referencesProvider = false
@@ -329,12 +324,7 @@ return {
             },
         }
 
-        -- NOTE: Possibly redundant
-        -- require('mason').setup()
-        -- You can add other tools here that you want Mason to install
-        -- for you, so that they are available from within Neovim.
-        -- local ensure_installed = vim.tbl_keys(servers or {})
-        -- require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+        local ensure_installed = vim.tbl_keys(servers or {})
 
         require('mason-lspconfig').setup({
             handlers = {
@@ -345,6 +335,8 @@ return {
                     require('lspconfig')[server_name].setup(server)
                 end,
             },
+            ensure_installed = ensure_installed,
+            automatic_enable = true,
         })
     end,
 }
