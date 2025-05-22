@@ -131,21 +131,6 @@ return {
                         ellipsis_char = '...',
                     }
 
-                    if vim.bo.filetype == 'ruby' and (item.kind == 'Method') then
-                        local paren_pos = string.find(item.abbr, '(', 1, true)
-
-                        if paren_pos then
-                            item.abbr = string.sub(item.abbr, 1, paren_pos - 1)
-                            item.abbr = item.abbr:gsub('%s+$', '')
-                        end
-
-                        lspkind_opts = {
-                            mode = 'symbol_text',
-                            maxwidth = 25,
-                            ellipsis_char = '...',
-                        }
-                    end
-
                     return lspkind.cmp_format(lspkind_opts)(entry, item)
                 end,
             },

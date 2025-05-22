@@ -30,9 +30,8 @@ return {
                 'pyright',
                 'jedi_language_server',
                 'gopls',
-                'intelephense',
-                'solargraph',
                 'ruby_lsp',
+                'intelephense',
             },
             -- auto-install configured servers (with lspconfig)
             automatic_installation = true, -- not the same as ensure_installed
@@ -46,8 +45,6 @@ return {
                 'eslint_d',
                 'isort',
                 'black',
-                'standardrb',
-                'solargraph',
             },
         })
     end,

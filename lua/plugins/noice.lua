@@ -37,6 +37,24 @@ return {
                     },
                     opts = { skip = true },
                 },
+                {
+                    filter = {
+                        event = 'notify',
+                        find = 'position_encoding param is required in vim.lsp.util.make_position_params',
+                    },
+                    opts = {
+                        skip = true,
+                    },
+                },
+                {
+                    filter = {
+                        event = 'notify',
+                        find = 'vim.lsp.util.jump_to_location is deprecated',
+                    },
+                    opts = {
+                        skip = true,
+                    },
+                },
             },
             -- you can enable a preset for easier configuration
             presets = {

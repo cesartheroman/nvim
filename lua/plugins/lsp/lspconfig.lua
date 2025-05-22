@@ -133,6 +133,7 @@ return {
         --  So, we create new capabilities with nvim cmp, and then broadcast that to the servers.
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
+
         local util = require('lspconfig/util')
 
         --  Add any additional override configuration in the following tables. Available keys are:
@@ -239,8 +240,8 @@ return {
                 mason = false,
                 cmd = { '/Users/davidroman/.rbenv/shims/ruby-lsp' },
                 settings = {
-                    formatter = 'standardrb',
-                    linters = { 'standardrb' },
+                    formatter = 'rubocop',
+                    linters = { 'rubocop' },
                     addonSettings = {
                         ['Ruby LSP Rails'] = {
                             -- Example: Disable the prompt about pending migrations on server start
@@ -250,10 +251,6 @@ return {
                     capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
                         -- Disable in favor of solargraph's completion capabilities
                         completionProvider = false,
-                        textDocument = {
-                            -- Explicitly request UTF-8
-                            positionEncoding = { 'utf-8' },
-                        },
                     }),
                 },
             },
@@ -272,12 +269,7 @@ return {
                         rubocop = { enabled = false },
                     },
                 },
-                capabilities = vim.tbl_deep_extend('force', {}, capabilities, {
-                    textDocument = {
-                        -- Explicitly request UTF-8
-                        positionEncoding = { 'utf-8' },
-                    },
-                }),
+                capabilities = vim.tbl_deep_extend('force', {}, capabilities, {}),
             },
 
             intelephense = {
@@ -315,11 +307,11 @@ return {
             emmet_ls = {
                 capabilities = capabilities,
                 filetypes = {
-                    'html',
                     'typescriptreact',
                     'javascriptreact',
-                    'php',
+                    'html',
                     'css',
+                    'php',
                 },
             },
         }
