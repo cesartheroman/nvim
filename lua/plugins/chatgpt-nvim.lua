@@ -18,9 +18,9 @@ return {
             api_type_cmd = 'echo localai',
             openai_params = {
                 model = 'google/gemini-2.5-flash-preview-05-20',
-                -- model = 'openrouter/auto',
+                -- model = 'google/gemini-2.5-pro-preview',
                 -- model = 'openai/o4-mini',
-                max_tokens = 2000,
+                max_tokens = 2048,
             },
             extra_curl_params = {
                 '-H',
