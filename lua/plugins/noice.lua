@@ -55,6 +55,15 @@ return {
                         skip = true,
                     },
                 },
+                {
+                    filter = {
+                        event = 'notify',
+                        find = 'warning: multiple different client offset_encodings detected for buffer, vim.lsp.util._get_offset_encoding() uses the offset_encoding from the first client',
+                    },
+                    opts = {
+                        skip = true,
+                    },
+                },
             },
             -- you can enable a preset for easier configuration
             presets = {
