@@ -101,3 +101,7 @@ vim.keymap.set('n', '<leader>ux', function()
     end
     vim.notify('No hidden buffers to reopen.', vim.log.levels.WARN)
 end, { desc = 'Reopen Last Closed Split Buffer ' })
+
+vim.keymap.set('n', '<leader>rl', function()
+    vim.o.relativenumber = not vim.o.relativenumber
+end, { desc = 'Toggle relative line numbers' })
