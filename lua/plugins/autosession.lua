@@ -1,6 +1,6 @@
 return {
     'rmagatti/auto-session',
-    event = 'DirChanged',
+    event = 'VimEnter',
     keys = {
         {
             '<leader>ls',
